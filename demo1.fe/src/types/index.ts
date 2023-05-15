@@ -10,5 +10,8 @@ export interface QueryOptions {
     rowNumber?: number
 }
 
-export class CreateUserQuery {
+export interface CreateUserQuery {
+    firstName: string;
+    lastName: string;
+    email: string;
 }
