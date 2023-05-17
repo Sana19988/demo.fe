@@ -1,19 +1,27 @@
 import Link from "next/link";
-import {useState} from "react";
+import {ReactElement, useState} from "react";
+import UserPage from "./users";
+import CreateUserPage from "./users/create";
+import {UserSettingsProviders} from "../components/providers/UserSettingsProviders";
+import UpdateUserSettingsPage from "./users/update-user-settings";
+import Layout from "../components/layouts/layout";
 
 export default function HomePage() {
-    const [counter, setCounter] = useState(0);
 
     return (
-        <>
-            <h1>Home page</h1>
-            <h1>{counter}</h1>
-            <Link href={"users"}>Go to users page</Link>
+        <UserSettingsProviders>
+            <UserPage/>
             <br/>
-            <button onClick={() => {
-                setCounter(counter + 1)
-            }}>Increment counter
-            </button>
-        </>
+            <hr/>
+            <UpdateUserSettingsPage/>
+        </UserSettingsProviders>
     );
+}
+
+HomePage.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <Layout>
+            {page}
+        </Layout>
+    )
 }
