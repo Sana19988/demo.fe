@@ -14,6 +14,6 @@ export const getDemo = async <T>(url: string, params?: unknown) => {
 }
 
 export const postDemo = async <T>(url: string, params?: unknown) => {
-    const response = await Axios.post<T>(url, {params});
+    const response = await Axios.post<T>(url, params);
     return response.data;
 }
