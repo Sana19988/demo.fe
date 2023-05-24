@@ -13,6 +13,9 @@ export interface User {
 export interface QueryOptions {
     pageIndex?: number,
     rowNumber?: number
+    headers?: {
+        authorization?: string;
+    }
 }
 
 export interface CreateUserQuery {
