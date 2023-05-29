@@ -1,20 +1,28 @@
-import {SWR_KEYS} from "../data/swrKeys";
 import useSWR from "swr";
 import {usersRequest} from "../data";
+import {useSession} from "next-auth/react";
+import {API_ENDPOINTS} from "../data/endpoints";
 
 export const useGetUsers = () => {
+    const {data: session} = useSession();
+
+    const headers = {
+        // @ts-ignore
+        Authorization: `Bearer ${session?.user?.accessToken}`,
+    };
+
     const {data, error} = useSWR(
         () => {
-            return SWR_KEYS.USERS_GET_ALL
+            return API_ENDPOINTS.USERS_GET_ALL
         }, () => {
-            return usersRequest.all()
+            return usersRequest.all({}, {headers});
         },
         {
-            refreshInterval: 90000,
-            revalidateIfStale: false,
-            revalidateOnFocus: false,
-            revalidateOn: false,
-            revalidateOnReconnect: false
+            refreshInterval: 9000,
+            revalidateIfStale: true,
+            revalidateOnFocus: true,
+            revalidateOn: true,
+            revalidateOnReconnect: true
         });
 
     return {data, error};
