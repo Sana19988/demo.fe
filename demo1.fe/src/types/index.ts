@@ -18,9 +18,18 @@ export interface QueryOptions {
     }
 }
 
+export interface IProps {
+    searchParams?: { [key: string]: string | string[] | undefined };
+}
+
 export interface CreateUserQuery {
     firstName: string;
     lastName: string;
+    email: string;
+}
+
+export interface LoginQuery {
+    password: string;
     email: string;
 }
 
@@ -42,6 +51,12 @@ export enum UserSettingsFunctions {
     CHANGE_EMAIL = 'CHANGE_EMAIL',
     CHANGE_FIRST_NAME = 'CHANGE_FIRST_NAME',
     CHANGE_LAST_NAME = 'CHANGE_LAST_NAME'
+}
+
+export enum RoleEnum {
+    ADMIN = 'Admin',
+    USER = 'User',
+    EMPLOYEE = 'Employee'
 }
 
 export type NextPageWithLayout<P = {}> = NextPage<P> &{
